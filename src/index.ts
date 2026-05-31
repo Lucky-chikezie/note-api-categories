@@ -1,13 +1,15 @@
- import express, { Request, Response, NextFunction } from "express";
+import express, { Request, Response, NextFunction } from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 import noteRoutes from "./routes/notes";
 import { AppError } from "./errors/AppError";
+import { loggingMiddleware } from "./middleware";
 
 dotenv.config();
 
 const app = express();
 app.use(express.json());
+app.use(loggingMiddleware);
 
 app.use("/api/notes", noteRoutes);
 
